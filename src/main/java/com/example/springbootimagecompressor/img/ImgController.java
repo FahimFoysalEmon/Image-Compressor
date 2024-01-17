@@ -20,7 +20,7 @@ public class ImgController {
     public String saveCompressedImg(@RequestParam MultipartFile img,
                                     @RequestParam String title) throws IOException {
         System.out.println(img);
-        return imgService.saveCompressedImg(img, title);
+        return imgService.saveCompressedAndResizedImg(img, title);
     }
 
 }
