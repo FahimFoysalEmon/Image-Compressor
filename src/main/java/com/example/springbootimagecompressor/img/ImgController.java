@@ -16,6 +16,7 @@ public class ImgController {
         this.imgService = imgService;
     }
 
+
     @PostMapping(value = "/img/compressor")
     public String saveCompressedImg(@RequestParam MultipartFile img,
                                     @RequestParam String title) throws IOException {
