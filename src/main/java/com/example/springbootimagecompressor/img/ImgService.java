@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,8 @@ public class ImgService {
         // Second step: Compress the resized image with dynamic compression level
         byte[] compressedImageData = compressImage(resizedImageStep1);
 
+        System.out.println(Arrays.toString(compressedImageData));
+
         // Save to the database
         Img imageData = imgRepository.save(Img.builder()
                 .title(title)
@@ -71,7 +74,9 @@ public class ImgService {
         for (float compressionQuality = 1.0f; compressionQuality >= 0.1f; compressionQuality -= 0.05f) {
             ImageIO.write(image, "jpg", compressedStream);
 
-            if (compressedStream.size() <= MAX_FILE_SIZE_KB * 1024) {
+            System.out.println(compressedStream.size());
+
+            if (compressedStream.size()/1024 <= MAX_FILE_SIZE_KB * 1024) {
                 return compressedStream.toByteArray();
             }
 
