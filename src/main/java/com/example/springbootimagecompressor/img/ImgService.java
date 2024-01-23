@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
@@ -84,5 +86,15 @@ public class ImgService {
         }
 
         throw new IOException("Unable to compress image within size limit.");
+    }
+
+    public List<String> getAllImages() {
+        List<String> allImageTitles = new ArrayList<>();
+
+        imgRepository.findAll().forEach(img -> {
+            allImageTitles.add(img.getTitle());
+        });
+
+        return allImageTitles;
     }
 }
